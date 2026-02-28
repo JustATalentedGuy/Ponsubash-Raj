@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ponsubash Raj R - ML & LLM Engineer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-tertiary: #1a1a1a;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --border: #2a2a2a;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: 6rem 0;
+            margin-top: 4rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 4rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .hero .description {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.875rem 2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Project Cards */
+        .project-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s;
+        }
+
+        .project-card:hover {
+            border-color: var(--accent);
+        }
+
+        .project-card h3 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tech-tag {
+            background: var(--bg-tertiary);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-links a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .project-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Metrics */
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .metric {
+            text-align: center;
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+
+        .metric-value {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Publication Card */
+        .publication {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .publication-title {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+        }
+
+        .publication-meta {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .publication-abstract {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .publication-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .publication-links a {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .publication-links a:hover {
+            text-decoration: underline;
+        }
+
+        .read-more {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .read-more:hover {
+            text-decoration: underline;
+        }
+
+        /* About Section */
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-content p {
+            color: var(--text-secondary);
+            line-height: 1.9;
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .skill-category h4 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .skill-category ul {
+            list-style: none;
+        }
+
+        .skill-category li {
+            color: var(--text-secondary);
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .skill-category li:last-child {
+            border-bottom: none;
+        }
+
+        /* Resume Page */
+        .resume-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .resume-viewer {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 3rem;
+            margin: 2rem 0;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+        }
+
+        .resume-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .last-updated {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 1.5rem;
+        }
+
+        /* Contact Page */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .contact-info h3 {
+            font-size: 1.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .contact-link:hover {
+            color: var(--accent);
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+        }
+
+        .contact-form {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.875rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 3rem 0;
+            margin-top: 6rem;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        /* Page Content */
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 4rem 0;
+            }
+
+            .metrics {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .resume-viewer iframe,
+            
+            .resume-viewer object {
+                height: 600px;
+            }
+        }
+
+        .architecture-diagram {
+            background: var(--bg-tertiary);
+            border: 2px dashed var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            color: var(--text-secondary);
+            margin: 2rem 0;
+            min-height: auto;
+            display: block;
+        }
+
+        .architecture-diagram img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 0 auto;
+        }
+
+
+        .project-section {
+            margin: 2.5rem 0;
+        }
+
+        .project-section h4 {
+            font-size: 1.3rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        .results-table th,
+        .results-table td {
+            padding: 0.875rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .results-table th {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .results-table td {
+            color: var(--text-secondary);
+        }
+
+        .challenge-item {
+            background: var(--bg-tertiary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 3px solid var(--accent);
+        }
+
+        .challenge-item h5 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .challenge-item p {
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo" onclick="showPage('home')">Ponsubash Raj R</a>
+            <ul class="nav-links">
+                <li><a href="#" onclick="showPage('home')" class="active" id="nav-home">Home</a></li>
+                <li><a href="#" onclick="showPage('projects')" id="nav-projects">Projects</a></li>
+                <li><a href="#" onclick="showPage('research')" id="nav-research">Research</a></li>
+                <li><a href="#" onclick="showPage('about')" id="nav-about">About</a></li>
+                <li><a href="#" onclick="showPage('resume')" id="nav-resume">Resume</a></li>
+                <li><a href="#" onclick="showPage('contact')" id="nav-contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HOME PAGE -->
+    <div id="home" class="page active">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1>Ponsubash Raj R</h1>
+                <p class="subtitle">Software Engineer (ML & LLM Systems)</p>
+                <p class="description">
+                    I love automation and building systems that learn and evolve on their own.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-primary" onclick="showPage('projects')">View Projects</a>
+                    <a href="#" class="btn btn-secondary" onclick="showPage('resume')">Resume</a>
+                    <a href="#" class="btn btn-secondary" onclick="showPage('contact')">Contact</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- What You Do Section -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>What I Do</h2>
+                </div>
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-icon">🧠</div>
+                        <h3>Machine Learning Systems</h3>
+                        <p>Designing, training, and deploying ML pipelines for production environments. Focus on scalable architectures and optimization.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🤖</div>
+                        <h3>LLM & Agentic AI</h3>
+                        <p>RAG systems, fine-tuning, tool-calling. Building intelligent agents with reasoning capabilities.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🔬</div>
+                        <h3>Research & Experimentation</h3>
+                        <p>Paper reproduction, ablation studies, and benchmarking. Contributing to the advancement of ML research.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Projects -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Featured Projects</h2>
+                    <p>Selected work demonstrating technical depth and research-driven approach</p>
+                </div>
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>Interactive Reinforcement Learning Pong Trainer</h3>
+                        <p>
+                            Live Deep Q-Network training playground with reward shaping controls, step-mode debugging, survival battle mode, and full RL diagnostics dashboard.
+                        </p>
+                        <div class="project-meta" style="margin-top: 1rem;">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">PyTorch</span>
+                            <span class="tech-tag">Pygame</span>
+                            <span class="tech-tag">DQN</span>
+                        </div>
+                        <a href="#" class="btn btn-secondary" style="margin-top: 1.5rem; display: inline-block;" onclick="showPage('projects')">
+                            Read Case Study →
+                        </a>
+                    </div>
+                    <div class="card">
+                        <h3>AI Learning Coach IDE</h3>
+                        <p>
+                            Process-aware VS Code extension that analyzes how you think while solving
+                            DSA problems and provides structured pedagogical feedback — without revealing solutions.
+                        </p>
+
+                        <div class="project-meta" style="margin-top: 1rem;">
+                            <span class="tech-tag">TypeScript</span>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">AST Analysis</span>
+                            <span class="tech-tag">LLM</span>
+                        </div>
+
+                        <a href="#" 
+                        class="btn btn-secondary" 
+                        style="margin-top: 1.5rem; display: inline-block;" 
+                        onclick="showPage('projects')">
+                            Read Case Study →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Metrics -->
+        <section class="section">
+            <div class="container">
+                <div class="metrics">
+                    <div class="metric">
+                        <div class="metric-value">2</div>
+                        <div class="metric-label">Published Papers</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">2</div>
+                        <div class="metric-label">Conferences Presented</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">250+</div>
+                        <div class="metric-label">LeetCode Problems</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- PROJECTS PAGE -->
+    <div id="projects" class="page">
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Projects</h2>
+                    <p>Detailed case studies of Personal Projects</p>
+                </div>
+
+                <div class="project-card">
+                    <h3>AI Learning Coach IDE</h3>
+                    <div class="project-meta">
+                        <span class="tech-tag">TypeScript</span>
+                        <span class="tech-tag">VS Code Extension API</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">AST Analysis</span>
+                        <span class="tech-tag">LLM (Groq)</span>
+                        <span class="tech-tag">Temporal Behavior Modeling</span>
+                    </div>
+
+                    <div class="project-section">
+                        <h4>Problem Statement</h4>
+                        <p class="project-description">
+                            Most AI coding tools focus on correctness or auto-completion. 
+                            However, competitive programming and DSA mastery depend on 
+                            cognitive habits — planning, boundary reasoning, iteration strategy, and conceptual clarity.
+                            There is currently no tool that analyzes how a learner thinks while coding.
+                        </p>
+                    </div>
+
+                    <div class="project-section">
+                        <h4>Why It Matters</h4>
+                        <p class="project-description">
+                            In algorithmic problem solving, the process is more important than the final code.
+                            Students often pass test cases while retaining flawed reasoning patterns.
+                            This system models coding as a temporal cognitive process and provides 
+                            structured pedagogical feedback without revealing solutions — reinforcing learning instead of shortcutting it.
+                        </p>
+                    </div>
+
+                    <div class="project-section">
+                        <h4>System Architecture</h4>
+                        <div class="architecture-diagram">
+                            <img src="images/aiide_arch.png"
+                                alt="VS Code Event Capture → Signal Derivation Engine → AST Analysis → Temporal Pattern Aggregation → Python Agent (Behavior Modeling) → Structured LLM Prompt → Pedagogical Feedback Generator → Webview UI">
+                        </div>
+                    </div>
+
+                    <div class="project-section">
+                        <h4>Core Capabilities</h4>
+
+                        <div class="challenge-item">
+                            <h5>Behavioral Signal Modeling</h5>
+                            <p>
+                                Captures micro-interactions including edit churn, undo density,
+                                idle vs active time ratios, cursor backtracking, and abandoned code paths
+                                to infer planning vs impulsive coding patterns.
+                            </p>
+                        </div>
+
+                        <div class="challenge-item">
+                            <h5>AST-Level Concept Detection</h5>
+                            <p>
+                                Parses code into abstract syntax trees to detect off-by-one patterns,
+                                inefficient iteration structures, suspicious boundary checks, and repeated
+                                data structure rewrites.
+                            </p>
+                        </div>
+
+                        <div class="challenge-item">
+                            <h5>Temporal Learning Analytics</h5>
+                            <p>
+                                Tracks repeated misconceptions across sessions and identifies
+                                improvement or regression trends over time.
+                                Models learning as a sequence, not a snapshot.
+                            </p>
+                        </div>
+
+                        <div class="challenge-item">
+                            <h5>Structured Pedagogical Feedback</h5>
+                            <p>
+                                Generates reflective, evidence-based feedback including strengths,
+                                areas to investigate, reasoning impact, and metacognitive questions —
+                                without revealing hints or solutions.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="project-section">
+                        <h4>Challenges & Solutions</h4>
+
+                        <div class="challenge-item">
+                            <h5>Challenge: High Noise in Raw IDE Events</h5>
+                            <p>
+                                Solution: Designed a signal derivation layer that aggregates low-level events
+                                into semantically meaningful behavioral metrics before LLM processing.
+                            </p>
+                        </div>
+
+                        <div class="challenge-item">
+                            <h5>Challenge: Avoiding Solution Leakage</h5>
+                            <p>
+                                Solution: Constrained prompt schema and structured output validation to ensure
+                                feedback remains reflective and pedagogical, not instructive.
+                            </p>
+                        </div>
+
+                        <div class="challenge-item">
+                            <h5>Challenge: Interpreting Temporal Behavior</h5>
+                            <p>
+                                Solution: Developed planning-ratio metrics and rewrite-density heuristics
+                                to distinguish strategic iteration from conceptual confusion.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="project-section">
+                        <h4>Results & Impact</h4>
+                        <table class="results-table">
+                            <tr>
+                                <th>Metric</th>
+                                <th>Outcome</th>
+                            </tr>
+                            <tr>
+                                <td>Behavioral Signals Extracted</td>
+                                <td>15+ engineered metrics</td>
+                            </tr>
+                            <tr>
+                                <td>Feedback Latency</td>
+                                <td>&lt; 5 seconds (local processing + LLM)</td>
+                            </tr>
+                            <tr>
+                                <td>Solution Leakage</td>
+                                <td>0% (by design constraint)</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="project-section">
+                        <h4>Research Angle</h4>
+                        <p class="project-description">
+                            This project explores temporal intelligence systems —
+                            treating IDEs as event-driven cognitive observatories.
+                            It demonstrates how structured signals + constrained LLM reasoning
+                            can produce reflective educational feedback rather than direct answers.
+                        </p>
+                    </div>
+
+                    <div class="project-links">
+                        <a href="https://github.com/JustATalentedGuy/AIIDE" target="_blank">📁 GitHub Repository →</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>Interactive Reinforcement Learning Pong Trainer</h3>
+                    <div class="project-meta">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">PyTorch</span>
+                        <span class="tech-tag">Pygame</span>
+                        <span class="tech-tag">Deep Q-Network</span>
+                        <span class="tech-tag">Reinforcement Learning</span>
+                    </div>
+
+                    <div class="project-section">
+                        <h4>Problem Statement</h4>
+                        <p class="project-description">
+                            Reinforcement Learning algorithms are often difficult to debug, visualize, and understand in real-time. Most implementations run as silent training loops with little interpretability. This project addresses that gap by creating a fully interactive RL playground where a Deep Q-Network learns to play Pong live, with complete transparency into states, rewards, Q-values, and training dynamics.
+                        </p>
+                    </div>
+
+                    <div class="project-section">
+                        <h4>Why It Matters</h4>
+                        <p class="project-description">
+                            Understanding RL requires more than reading equations — it demands observing policy evolution, reward shaping effects, and stability trade-offs. This system transforms a classic control problem into a live experimental sandbox where hyperparameters, reward components, and difficulty can be modified on the fly, enabling deeper intuition about learning behavior.
+                        </p>
+                    </div>
+
+                    <div class="project-section">
+                        <h4>System Architecture</h4>
+                        <div class="architecture-diagram">
+                            <img src="images/rl_arch.png"
+                                alt="Pong RL system architecture: environment, state encoding, DQN policy, replay buffer, double DQN, live training visualization">
+                        </div>
+                    </div>
+
+                    <div class="project-section">
+                        <h4>Core Features</h4>
+
+                        <div class="challenge-item">
+                            <h5>Live Reward Shaping Controls</h5>
+                            <p>
+                                Fully configurable shaping parameters including terminal rewards, action-change penalties, stabilization rewards, and distance-based shaping (α). Enables experimentation without modifying source code.
+                            </p>
+                        </div>
+
+                        <div class="challenge-item">
+                            <h5>Step-by-Step Debug Mode</h5>
+                            <p>
+                                Manual stepping mode allows frame-by-frame execution. Displays reward and loss graphs in real time, enabling microscopic inspection of learning dynamics.
+                            </p>
+                        </div>
+
+                        <div class="challenge-item">
+                            <h5>Battle (Survival) Mode</h5>
+                            <p>
+                                A 5-minute survival challenge where difficulty escalates every 30 seconds. Ball speed increases, paddle height decreases, and leaderboard statistics track performance.
+                            </p>
+                        </div>
+
+                        <div class="challenge-item">
+                            <h5>Multiple Opponent Types</h5>
+                            <p>
+                                Train against a mathematically perfect intercept bot, a heuristic-based decent bot, or a human player. Enables curriculum-style training and evaluation.
+                            </p>
+                        </div>
+
+                        <div class="challenge-item">
+                            <h5>Full Model Persistence</h5>
+                            <p>
+                                Save and load not only network weights, but optimizer state, replay statistics, reward windows, and training metrics — ensuring complete session restoration.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="project-section">
+                        <h4>Technical Highlights</h4>
+                        <table class="results-table">
+                            <tr>
+                                <th>Component</th>
+                                <th>Implementation</th>
+                            </tr>
+                            <tr>
+                                <td>Algorithm</td>
+                                <td>Double Deep Q-Network (DQN)</td>
+                            </tr>
+                            <tr>
+                                <td>Network Architecture</td>
+                                <td>5 → 128 → 128 → 3 (ReLU)</td>
+                            </tr>
+                            <tr>
+                                <td>Replay Buffer</td>
+                                <td>20,000 transitions</td>
+                            </tr>
+                            <tr>
+                                <td>Batch Size</td>
+                                <td>32</td>
+                            </tr>
+                            <tr>
+                                <td>Target Network Updates</td>
+                                <td>Periodic hard update (configurable)</td>
+                            </tr>
+                            <tr>
+                                <td>Visualization</td>
+                                <td>Matplotlib rendered into Pygame surface</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="project-section">
+                        <h4>Challenges & Solutions</h4>
+
+                        <div class="challenge-item">
+                            <h5>Challenge: RL Instability & Jittery Policies</h5>
+                            <p>
+                                Solution: Implemented action-change penalties and stabilization rewards to encourage smoother paddle control while preserving responsiveness.
+                            </p>
+                        </div>
+
+                        <div class="challenge-item">
+                            <h5>Challenge: Sparse Rewards in Pong</h5>
+                            <p>
+                                Solution: Designed distance-based shaping reward using predicted intercept points to provide dense learning feedback during ball travel.
+                            </p>
+                        </div>
+
+                        <div class="challenge-item">
+                            <h5>Challenge: Observability of Learning Process</h5>
+                            <p>
+                                Solution: Built real-time reward/loss charts, Q-value display, epsilon tracking, and episode statistics directly into the game UI.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="project-section">
+                        <h4>Impact & Learning Outcomes</h4>
+                        <p class="project-description">
+                            This project bridges theory and practice by converting a textbook RL algorithm into an interactive laboratory. It provides hands-on exposure to reward shaping, exploration strategies, Double DQN stabilization, and curriculum-based difficulty progression — all within a dynamic, visual environment.
+                        </p>
+                    </div>
+
+                    <div class="project-links">
+                        <a href="https://github.com/JustATalentedGuy/Play2LearnRL" target="_blank">📁 GitHub Repository →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- RESEARCH PAGE -->
+    <div id="research" class="page">
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Research & Publications</h2>
+                    <p>Academic contributions through publications</p>
+                </div>
+
+                <div class="publication">
+                    <h3 class="publication-title">Word-Level Language Identification in Dravidian Code-Mixed Text Using Machine Learning: A Comparative Analysis of Models and Vectorization Techniques</h3>
+                    <div class="publication-meta">
+                        Forum for Information Retrieval Evaluation • December 2024
+                    </div>
+                    <p class="publication-abstract">
+                        Language Identification (LI) is a major component for various applications such as Sentiment Analysis, Machine Translation, Information Retrieval, and Natural Language Processing. In multilingual countries like India, especially among the younger generation, social media often contains code-mixed texts where local languages are combined with English. We analyze the performances of 5 models using 2 different vectorizers for the Word-Level Language Identification of Dravidian Languages.
+                    </p>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                        <strong>My Contribution:</strong> Lead researcher, conducted experiments, wrote manuscript.
+                    </p>
+                    <div class="publication-links">
+                        <a href="https://ceur-ws.org/Vol-4054/T3-7.pdf">📄 PDF</a>
+                        <a href="https://github.com/JustATalentedGuy/FIRE2024">💻 Code</a>
+                        <a href="https://www.semanticscholar.org/paper/Word-Level-Language-Identification-in-Dravidian-A-PonsubashRaj-Bharathi/8ff00f579e3101c1b855fbbca261b12ebac66298">🎓 Cite</a>
+                    </div>
+                </div>
+
+                <div class="publication">
+                    <h3 class="publication-title">A Study of ML and DL approaches for Sentiment Analysis in Code-Mixed Tamil and Tulu Texts</h3>
+                    <div class="publication-meta">
+                        Fifth Workshop on Speech, Vision, and Language Technologies for Dravidian Languages • May 2025
+                    </div>
+                    <p class="publication-abstract">
+                        Explored sentiment classification in Tamil-English and Tulu-English code-mixed datasets using both machine learning (ML) and deep learning (DL) approaches. DL models, while theoretically capable of capturing richer contextual and semantic relationships, underperform with limited data availability. ML models are better suited for sentiment analysis of code-mixed texts, particularly in low-resource settings, as they effectively leverage n-gram-based features without requiring extensive labeled data.
+                    </p>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                        <strong>My Contribution:</strong> Conducted experiments for DL, wrote manuscript.
+                    </p>
+                    <div class="publication-links">
+                        <a href="https://aclanthology.org/2025.dravidianlangtech-1.47.pdf">📄 PDF</a>
+                        <a href="https://github.com/JustATalentedGuy/JustATalentedTeam_NAACL">💻 Code</a>
+                        <a href="https://aclanthology.org/2025.dravidianlangtech-1.47/">🎓 Cite</a>
+                    </div>
+                </div>
+                
+
+                <div style="margin-top: 3rem; padding: 2rem; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px;">
+                    <h3 style="margin-bottom: 1rem;">Conference Presentations</h3>
+                    <ul style="color: var(--text-secondary); line-height: 2;">
+                        <li>Forum for Information Retrieval Evaluation 2024, DAIICT , Gandhinagar, India (Online)</li>
+                        <li>9th International Conference on Computational Intelligence in Data Science 2026, SSN College of Engineering, Chennai, India</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ABOUT PAGE -->
+    <div id="about" class="page">
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>About</h2>
+                </div>
+
+                <div class="about-content">
+                    <p>
+                        I'm a Software Engineer with strong skills and interests in Machine Learning and Large Language Model systems. My background combines rigorous computer science fundamentals from SSN College of Engineering with hands-on experience building ML systems and conducting research.
+                    </p>
+
+                    <p>
+                        My work centers on research-driven machine learning, with particular focus on natural language processing, and agentic AI systems. I believe in understanding systems at a fundamental level — from the mathematics behind algorithms to the engineering decisions that make them production-ready.
+                    </p>
+
+                    <p>
+                        Currently, I'm focused on Large Language Models, RAG architectures, and evaluation methodologies for generative AI systems. My projects span Reinforcement Learning systems, chatbots, and developer tools powered by AI.
+                    </p>
+
+                    <p>
+                        I'm seeking opportunities in AI engineering and ML research where I can contribute to building systems that push the boundaries of what's possible with artificial intelligence. My goal is to work at the intersection of cutting-edge research and practical deployment, building solutions that are both technically sound and impactful.
+                    </p>
+
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <h4>Machine Learning</h4>
+                            <ul>
+                                <li>Deep Learning (PyTorch)</li>
+                                <li>Natural Language Processing</li>
+                                <li>Large Language Models</li>
+                                <li>Reinforcement Learning</li>
+                            </ul>
+                        </div>
+
+                        <div class="skill-category">
+                            <h4>LLM & Generative AI</h4>
+                            <ul>
+                                <li>RAG Systems</li>
+                                <li>Prompt Engineering</li>
+                                <li>LangChain, LlamaIndex</li>
+                                <li>Tool-calling & Agents</li>
+                            </ul>
+                        </div>
+
+                        <div class="skill-category">
+                            <h4>Software Engineering</h4>
+                            <ul>
+                                <li>Python, Java, JavaScript/TypeScript</li>
+                                <li>MongoDB, MySQL, Hadoop, Spark, Neo4j</li>
+                                <li>WSL, Git</li>
+                                <li>RESTful API Design</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 3rem; padding: 2rem; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px;">
+                        <h3 style="margin-bottom: 1rem;">Beyond Work</h3>
+                        <p style="color: var(--text-secondary);">
+                            When I'm not coding or reading papers, I enjoy playing chess, solving rubik's cube, and competitive programming problems.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- RESUME PAGE -->
+    <div id="resume" class="page">
+        <section class="section">
+            <div class="container resume-container">
+                <div class="section-header">
+                    <h2>Resume</h2>
+                    <p>Download or view my complete professional resume</p>
+                </div>
+
+                <div class="resume-viewer">
+                    <iframe 
+                        src="https://drive.google.com/file/d/1lmA_C5nInBm6Toa6v19ypASP8Gwt8qQ5/preview" 
+                        width="100%"
+                        height="800px" 
+                        style="border: 1px solid var(--border); border-radius: 12px;"
+                        allow="autoplay">
+                    </iframe>
+                </div>
+
+                <div class="resume-actions">
+                    <a href="images/RESUME.pdf" class="btn btn-primary" download>Download Resume PDF</a>
+                    <a href="https://drive.google.com/file/d/1lmA_C5nInBm6Toa6v19ypASP8Gwt8qQ5/view?usp=sharing" class="btn btn-secondary" target="_blank">View on Google Drive</a>
+                </div>
+
+                <p class="last-updated">Last updated: February 2026</p>
+
+                <div style="margin-top: 3rem; padding: 2rem; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; text-align: left;">
+                    <h3 style="margin-bottom: 1rem;">Quick Summary</h3>
+                    <ul style="color: var(--text-secondary); line-height: 2;">
+                        <li><strong>Education:</strong> M.Tech Computer Science & Engineering (5 Years Integrated), SSN College of Engineering</li>
+                        <li><strong>Specialization:</strong> Machine Learning, LLM Systems, Agentic AI</li>
+                        <li><strong>Skills:</strong> Python, PyTorch, LangChain, Competitive Programming</li>
+                        <li><strong>Interests:</strong> Research-driven AI, Agentic Systems, Production ML</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- CONTACT PAGE -->
+    <div id="contact" class="page">
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Contact</h2>
+                    <p>Let's connect and discuss opportunities</p>
+                </div>
+
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h3>Get in Touch</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 2rem;">
+                            I'm open to discussing engineering opportunities, research collaborations and interesting ML projects.
+                        </p>
+
+                        <div class="contact-links">
+                            <a href="mailto:ponsubashraj2370043@ssn.edu.in" class="contact-link">
+                                <span class="contact-icon">📧</span>
+                                <div>
+                                    <div style="font-weight: 500; color: var(--text-primary);">Email</div>
+                                    <div>ponsubashraj2370043@ssn.edu.in</div>
+                                </div>
+                            </a>
+
+                            <a href="https://www.linkedin.com/in/ponsubashraj/" class="contact-link">
+                                <span class="contact-icon">💼</span>
+                                <div>
+                                    <div style="font-weight: 500; color: var(--text-primary);">LinkedIn</div>
+                                    <div>linkedin.com/in/ponsubashraj</div>
+                                </div>
+                            </a>
+
+                            <a href="https://github.com/JustATalentedGuy" class="contact-link">
+                                <span class="contact-icon">💻</span>
+                                <div>
+                                    <div style="font-weight: 500; color: var(--text-primary);">GitHub</div>
+                                    <div>github.com/JustATalentedGuy</div>
+                                </div>
+                            </a>
+
+                            <a href="https://orcid.org/0009-0000-7761-4826" class="contact-link">
+                                <span class="contact-icon">🎓</span>
+                                <div>
+                                    <div style="font-weight: 500; color: var(--text-primary);">ORCiD</div>
+                                    <div>View Profile</div>
+                                </div>
+                            </a>
+
+                            <a href="https://leetcode.com/u/JustACoolGuy/" class="contact-link">
+                                <span class="contact-icon"><img src="images/leetcode.png" alt="LeetCode Logo" height=30px width=30px></span>
+                                <div>
+                                    <div style="font-weight: 500; color: var(--text-primary);">LeetCode</div>
+                                    <div>View Profile</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <form id="contact-form">
+                        <input type="hidden" name="access_key" value="88683312-5d59-4854-8810-86a7e4616462">
+
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input name="name" type="text" placeholder="Your name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input name="email" type="email" placeholder="your.email@example.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Subject</label>
+                            <input name="user_subject" type="text" placeholder="What is this regarding?" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Message</label>
+                            <textarea name="message" placeholder="Your message..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                        <p id="form-status" style="margin-top:0.75rem; color: var(--text-secondary);"></p>
+                    </form>
+
+                <div style="margin-top: 3rem; text-align: center; padding: 2rem; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px;">
+                    <h3 style="margin-bottom: 1rem;">Based in Chennai, India</h3>
+                    <p style="color: var(--text-secondary);">
+                        Available for remote opportunities worldwide and open to relocation for the right role.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Ponsubash Raj R. Built with focus on clarity and substance.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">Software Engineer (ML & LLM Systems)</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const form = e.target;
+            const status = document.getElementById('form-status');
+            status.textContent = 'Sending...';
+
+            const formData = new FormData(form);
+
+            try {
+                const res = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (res.ok) {
+                    status.textContent = 'Message sent. Thank you!';
+                    alert('Your message was sent successfully.');
+                    form.reset();
+                } else {
+                    status.textContent = 'Failed to send. Please try again later.';
+                    alert('Failed to send your message. Please try again later.');
+                }
+            } catch (err) {
+                status.textContent = 'Failed to send. Please check your connection.';
+                alert('Failed to send your message. Please check your connection.');
+            }
+        });
+
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            document.getElementById(pageId).classList.add('active');
+            
+            const navLinks = document.querySelectorAll('.nav-links a');
+            navLinks.forEach(link => link.classList.remove('active'));
+            
+            document.getElementById('nav-' + pageId).classList.add('active');
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
