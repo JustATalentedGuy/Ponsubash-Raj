@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ponsubash Raj R - ML & LLM Engineer</title>
+    <title>Ponsubash Raj R - Agentic AI & Systems Engineer</title>
     <style>
         * {
             margin: 0;
@@ -49,6 +49,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 1.5rem;
         }
 
         .logo {
@@ -62,6 +63,8 @@
             display: flex;
             gap: 2rem;
             list-style: none;
+            flex-wrap: wrap;
+            justify-content: flex-end;
         }
 
         .nav-links a {
@@ -218,21 +221,114 @@
         }
 
         /* Project Cards */
+        .project-toolbar {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .project-toolbar-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .project-toolbar h3 {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+        }
+
+        .filter-actions {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.55rem 0.85rem;
+            cursor: pointer;
+            font: inherit;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--accent);
+            color: var(--text-primary);
+        }
+
+        .filter-btn.active {
+            background: rgba(59, 130, 246, 0.14);
+            border-color: var(--accent);
+            color: var(--text-primary);
+        }
+
+        .project-filter-list {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.25rem;
+            align-items: stretch;
+        }
+
+        .project-summary-card {
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            color: inherit;
+            text-decoration: none;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+
+        .project-summary-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .project-summary-card h3 {
+            font-size: 1.25rem;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+        }
+
+        .project-summary-card p {
+            color: var(--text-secondary);
+            line-height: 1.65;
+            margin-bottom: 1rem;
+        }
+
+        .project-summary-card.hidden {
+            display: none;
+        }
+
         .project-card {
             background: var(--bg-secondary);
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 8px;
             padding: 2.5rem;
             margin-bottom: 2rem;
-            transition: all 0.3s;
-        }
-
-        .project-card:hover {
-            border-color: var(--accent);
         }
 
         .project-card h3 {
-            font-size: 1.75rem;
+            font-size: 1.9rem;
             margin-bottom: 1rem;
             color: var(--accent);
         }
@@ -247,10 +343,30 @@
         .tech-tag {
             background: var(--bg-tertiary);
             padding: 0.4rem 1rem;
-            border-radius: 20px;
+            border-radius: 6px;
             font-size: 0.85rem;
             color: var(--text-secondary);
             border: 1px solid var(--border);
+        }
+
+        .card-tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: auto;
+        }
+
+        .empty-projects {
+            display: none;
+            color: var(--text-secondary);
+            text-align: center;
+            padding: 2rem;
+            border: 1px dashed var(--border);
+            border-radius: 8px;
+        }
+
+        .empty-projects.visible {
+            display: block;
         }
 
         .project-description {
@@ -280,7 +396,7 @@
         /* Metrics */
         .metrics {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 2rem;
             margin: 4rem 0;
         }
@@ -569,22 +685,29 @@
             }
         }
 
-        .architecture-diagram {
+        .architecture-diagram,
+        .architecture-placeholder {
             background: var(--bg-tertiary);
             border: 2px dashed var(--border);
-            border-radius: 12px;
+            border-radius: 8px;
             padding: 1.5rem;
             text-align: center;
             color: var(--text-secondary);
             margin: 2rem 0;
-            min-height: auto;
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
         }
 
-        .architecture-diagram img {
+        .architecture-diagram img,
+        .architecture-placeholder img {
             display: block;
-            max-width: 100%;
+            width: 100%;
+            max-width: 860px;
+            max-height: 500px;
             height: auto;
+            object-fit: contain;
             margin: 0 auto;
         }
 
@@ -637,6 +760,105 @@
         .challenge-item p {
             color: var(--text-secondary);
         }
+
+        .detail-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .detail-kicker {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stack-list {
+            columns: 2;
+            color: var(--text-secondary);
+            line-height: 1.9;
+            padding-left: 1.25rem;
+        }
+
+        .blog-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .blog-card {
+            display: grid;
+            grid-template-columns: minmax(180px, 0.9fr) minmax(260px, 1.7fr) auto;
+            gap: 1.5rem;
+            align-items: center;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .blog-card h3 {
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        .blog-card p {
+            color: var(--text-secondary);
+        }
+
+        .blog-card a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .blog-card a:hover {
+            text-decoration: underline;
+        }
+
+        .stack-list li {
+            break-inside: avoid;
+        }
+
+        @media (max-width: 768px) {
+            .project-toolbar-header {
+                align-items: stretch;
+            }
+
+            .filter-actions {
+                width: 100%;
+            }
+
+            .filter-actions .filter-btn {
+                flex: 1;
+            }
+
+            .project-card {
+                padding: 1.5rem;
+            }
+
+            .stack-list {
+                columns: 1;
+            }
+
+            .architecture-diagram,
+            .architecture-placeholder {
+                padding: 0.75rem;
+            }
+
+            .architecture-diagram img,
+            .architecture-placeholder img {
+                max-height: 360px;
+            }
+
+            .blog-card {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -647,6 +869,7 @@
             <ul class="nav-links">
                 <li><a href="#" onclick="showPage('home')" class="active" id="nav-home">Home</a></li>
                 <li><a href="#" onclick="showPage('projects')" id="nav-projects">Projects</a></li>
+                <li><a href="#" onclick="showPage('blogs')" id="nav-blogs">Blogs</a></li>
                 <li><a href="#" onclick="showPage('research')" id="nav-research">Research</a></li>
                 <li><a href="#" onclick="showPage('about')" id="nav-about">About</a></li>
                 <li><a href="#" onclick="showPage('resume')" id="nav-resume">Resume</a></li>
@@ -661,9 +884,9 @@
         <section class="hero">
             <div class="container">
                 <h1>Ponsubash Raj R</h1>
-                <p class="subtitle">Software Engineer (ML & LLM Systems)</p>
+                <p class="subtitle">Software Engineer (Agentic AI, System Design & Cloud Architecture)</p>
                 <p class="description">
-                    I love automation and building systems that learn and evolve on their own.
+                    I build AI systems that are useful beyond the demo: agentic workflows, retrieval systems, durable background jobs, and cloud architectures that can survive real constraints.
                 </p>
                 <div class="cta-buttons">
                     <a href="#" class="btn btn-primary" onclick="showPage('projects')">View Projects</a>
@@ -682,66 +905,18 @@
                 <div class="cards-grid">
                     <div class="card">
                         <div class="card-icon">🧠</div>
-                        <h3>Machine Learning Systems</h3>
-                        <p>Designing, training, and deploying ML pipelines for production environments. Focus on scalable architectures and optimization.</p>
+                        <h3>Agentic AI Systems</h3>
+                        <p>Designing tool-using AI workflows with retrieval, structured outputs, orchestration, and feedback loops that stay grounded in product needs.</p>
                     </div>
                     <div class="card">
                         <div class="card-icon">🤖</div>
-                        <h3>LLM & Agentic AI</h3>
-                        <p>RAG systems, fine-tuning, tool-calling. Building intelligent agents with reasoning capabilities.</p>
+                        <h3>System Design & Cloud</h3>
+                        <p>Building systems with queues, durable state, observability, storage boundaries, and deployment paths that make AI applications reliable.</p>
                     </div>
                     <div class="card">
                         <div class="card-icon">🔬</div>
-                        <h3>Research & Experimentation</h3>
-                        <p>Paper reproduction, ablation studies, and benchmarking. Contributing to the advancement of ML research.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Featured Projects -->
-        <section class="section">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Featured Projects</h2>
-                    <p>Selected work demonstrating technical depth and research-driven approach</p>
-                </div>
-                <div class="cards-grid">
-                    <div class="card">
-                        <h3>Interactive Reinforcement Learning Pong Trainer</h3>
-                        <p>
-                            Live Deep Q-Network training playground with reward shaping controls, step-mode debugging, survival battle mode, and full RL diagnostics dashboard.
-                        </p>
-                        <div class="project-meta" style="margin-top: 1rem;">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">PyTorch</span>
-                            <span class="tech-tag">Pygame</span>
-                            <span class="tech-tag">DQN</span>
-                        </div>
-                        <a href="#" class="btn btn-secondary" style="margin-top: 1.5rem; display: inline-block;" onclick="showPage('projects')">
-                            Read Case Study →
-                        </a>
-                    </div>
-                    <div class="card">
-                        <h3>AI Learning Coach IDE</h3>
-                        <p>
-                            Process-aware VS Code extension that analyzes how you think while solving
-                            DSA problems and provides structured pedagogical feedback — without revealing solutions.
-                        </p>
-
-                        <div class="project-meta" style="margin-top: 1rem;">
-                            <span class="tech-tag">TypeScript</span>
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">AST Analysis</span>
-                            <span class="tech-tag">LLM</span>
-                        </div>
-
-                        <a href="#" 
-                        class="btn btn-secondary" 
-                        style="margin-top: 1.5rem; display: inline-block;" 
-                        onclick="showPage('projects')">
-                            Read Case Study →
-                        </a>
+                        <h3>Applied AI Engineering</h3>
+                        <p>Turning research ideas into working products through evaluation, graceful degradation, and careful engineering trade-offs.</p>
                     </div>
                 </div>
             </div>
@@ -751,6 +926,14 @@
         <section class="section">
             <div class="container">
                 <div class="metrics">
+                    <div class="metric">
+                        <div class="metric-value">6</div>
+                        <div class="metric-label">Project Case Studies</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">1</div>
+                        <div class="metric-label">Blog Draft</div>
+                    </div>
                     <div class="metric">
                         <div class="metric-value">3</div>
                         <div class="metric-label">Published Papers</div>
@@ -774,294 +957,182 @@
             <div class="container">
                 <div class="section-header">
                     <h2>Projects</h2>
-                    <p>Detailed case studies of Personal Projects</p>
+                    <p>Agentic AI, retrieval, cloud architecture, and learning systems presented as focused case studies.</p>
                 </div>
 
-                <div class="project-card">
-                    <h3>AI Learning Coach IDE</h3>
-                    <div class="project-meta">
-                        <span class="tech-tag">TypeScript</span>
-                        <span class="tech-tag">VS Code Extension API</span>
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">AST Analysis</span>
-                        <span class="tech-tag">LLM (Groq)</span>
-                        <span class="tech-tag">Temporal Behavior Modeling</span>
-                    </div>
-
-                    <div class="project-section">
-                        <h4>Problem Statement</h4>
-                        <p class="project-description">
-                            Most AI coding tools focus on correctness or auto-completion. 
-                            However, competitive programming and DSA mastery depend on 
-                            cognitive habits — planning, boundary reasoning, iteration strategy, and conceptual clarity.
-                            There is currently no tool that analyzes how a learner thinks while coding.
-                        </p>
-                    </div>
-
-                    <div class="project-section">
-                        <h4>Why It Matters</h4>
-                        <p class="project-description">
-                            In algorithmic problem solving, the process is more important than the final code.
-                            Students often pass test cases while retaining flawed reasoning patterns.
-                            This system models coding as a temporal cognitive process and provides 
-                            structured pedagogical feedback without revealing solutions — reinforcing learning instead of shortcutting it.
-                        </p>
-                    </div>
-
-                    <div class="project-section">
-                        <h4>System Architecture</h4>
-                        <div class="architecture-diagram">
-                            <img src="images/aiide_arch.png"
-                                alt="VS Code Event Capture → Signal Derivation Engine → AST Analysis → Temporal Pattern Aggregation → Python Agent (Behavior Modeling) → Structured LLM Prompt → Pedagogical Feedback Generator → Webview UI">
+                <div class="project-toolbar" aria-label="Project filters">
+                    <div class="project-toolbar-header">
+                        <h3>Filter by skills and tools</h3>
+                        <div class="filter-actions">
+                            <button class="filter-btn" type="button" onclick="selectAllProjectFilters()">Select all</button>
+                            <button class="filter-btn" type="button" onclick="deselectAllProjectFilters()">Deselect all</button>
                         </div>
                     </div>
-
-                    <div class="project-section">
-                        <h4>Core Capabilities</h4>
-
-                        <div class="challenge-item">
-                            <h5>Behavioral Signal Modeling</h5>
-                            <p>
-                                Captures micro-interactions including edit churn, undo density,
-                                idle vs active time ratios, cursor backtracking, and abandoned code paths
-                                to infer planning vs impulsive coding patterns.
-                            </p>
-                        </div>
-
-                        <div class="challenge-item">
-                            <h5>AST-Level Concept Detection</h5>
-                            <p>
-                                Parses code into abstract syntax trees to detect off-by-one patterns,
-                                inefficient iteration structures, suspicious boundary checks, and repeated
-                                data structure rewrites.
-                            </p>
-                        </div>
-
-                        <div class="challenge-item">
-                            <h5>Temporal Learning Analytics</h5>
-                            <p>
-                                Tracks repeated misconceptions across sessions and identifies
-                                improvement or regression trends over time.
-                                Models learning as a sequence, not a snapshot.
-                            </p>
-                        </div>
-
-                        <div class="challenge-item">
-                            <h5>Structured Pedagogical Feedback</h5>
-                            <p>
-                                Generates reflective, evidence-based feedback including strengths,
-                                areas to investigate, reasoning impact, and metacognitive questions —
-                                without revealing hints or solutions.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="project-section">
-                        <h4>Challenges & Solutions</h4>
-
-                        <div class="challenge-item">
-                            <h5>Challenge: High Noise in Raw IDE Events</h5>
-                            <p>
-                                Solution: Designed a signal derivation layer that aggregates low-level events
-                                into semantically meaningful behavioral metrics before LLM processing.
-                            </p>
-                        </div>
-
-                        <div class="challenge-item">
-                            <h5>Challenge: Avoiding Solution Leakage</h5>
-                            <p>
-                                Solution: Constrained prompt schema and structured output validation to ensure
-                                feedback remains reflective and pedagogical, not instructive.
-                            </p>
-                        </div>
-
-                        <div class="challenge-item">
-                            <h5>Challenge: Interpreting Temporal Behavior</h5>
-                            <p>
-                                Solution: Developed planning-ratio metrics and rewrite-density heuristics
-                                to distinguish strategic iteration from conceptual confusion.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="project-section">
-                        <h4>Results & Impact</h4>
-                        <table class="results-table">
-                            <tr>
-                                <th>Metric</th>
-                                <th>Outcome</th>
-                            </tr>
-                            <tr>
-                                <td>Behavioral Signals Extracted</td>
-                                <td>15+ engineered metrics</td>
-                            </tr>
-                            <tr>
-                                <td>Feedback Latency</td>
-                                <td>&lt; 5 seconds (local processing + LLM)</td>
-                            </tr>
-                            <tr>
-                                <td>Solution Leakage</td>
-                                <td>0% (by design constraint)</td>
-                            </tr>
-                        </table>
-                    </div>
-
-                    <div class="project-section">
-                        <h4>Research Angle</h4>
-                        <p class="project-description">
-                            This project explores temporal intelligence systems —
-                            treating IDEs as event-driven cognitive observatories.
-                            It demonstrates how structured signals + constrained LLM reasoning
-                            can produce reflective educational feedback rather than direct answers.
-                        </p>
-                    </div>
-
-                    <div class="project-links">
-                        <a href="https://github.com/JustATalentedGuy/AIIDE" target="_blank">📁 GitHub Repository →</a>
-                    </div>
+                    <div class="project-filter-list" id="project-filter-list"></div>
                 </div>
 
+                <div class="project-grid" id="project-grid">
+                    <a href="#" class="project-summary-card" data-skills="FastAPI,Celery,Redis,PostgreSQL,pgvector,MinIO/S3,Groq,LangGraph,AWS,MCP,Cloudflare,Docker,RAG" onclick="showProjectDetail('project-courseflow')">
+                        <h3>CourseFlow</h3>
+                        <p>Turns YouTube playlists into durable courses with notes, search, quizzes, spaced repetition, exports, diagrams, and an MCP interface.</p>
+                        <div class="card-tech-stack">
+                            <span class="tech-tag">FastAPI</span><span class="tech-tag">Celery</span><span class="tech-tag">Redis</span><span class="tech-tag">PostgreSQL + pgvector</span><span class="tech-tag">MinIO/S3</span><span class="tech-tag">LangGraph</span><span class="tech-tag">MCP</span><span class="tech-tag">AWS</span>
+                        </div>
+                    </a>
+
+                    <a href="#" class="project-summary-card" data-skills="FastAPI,Celery,Redis,PostgreSQL,Qdrant,MinIO/S3,Groq,LangGraph,AWS,Docker,RAG" onclick="showProjectDetail('project-docflow')">
+                        <h3>Docflow</h3>
+                        <p>Multi-user document Q&A with async OCR, hybrid retrieval, user isolation, object storage, and AWS deployment.</p>
+                        <div class="card-tech-stack">
+                            <span class="tech-tag">FastAPI</span><span class="tech-tag">Celery</span><span class="tech-tag">Redis</span><span class="tech-tag">Qdrant</span><span class="tech-tag">PostgreSQL</span><span class="tech-tag">MinIO/S3</span><span class="tech-tag">AWS</span>
+                        </div>
+                    </a>
+
+                    <a href="#" class="project-summary-card" data-skills="FastAPI,PostgreSQL,pgvector,Groq,LangGraph,Expo,Supabase,Render,Docker,RAG" onclick="showProjectDetail('project-pulse')">
+                        <h3>Pulse</h3>
+                        <p>Personal AI intelligence reader that ingests technical sources, enriches them, ranks them, and serves a mobile research feed.</p>
+                        <div class="card-tech-stack">
+                            <span class="tech-tag">FastAPI</span><span class="tech-tag">PostgreSQL + pgvector</span><span class="tech-tag">Groq</span><span class="tech-tag">LangGraph</span><span class="tech-tag">Expo</span><span class="tech-tag">Supabase</span><span class="tech-tag">Render</span>
+                        </div>
+                    </a>
+
+                    <a href="#" class="project-summary-card" data-skills="FastAPI,React,Anthropic,SQLite,PyMuPDF,sentence-transformers,RAG" onclick="showProjectDetail('project-smartnotes')">
+                        <h3>Smart Notes Generator</h3>
+                        <p>Local-first study notes app that converts PDFs and slides into structured notes while preserving diagrams in context.</p>
+                        <div class="card-tech-stack">
+                            <span class="tech-tag">FastAPI</span><span class="tech-tag">React</span><span class="tech-tag">Anthropic</span><span class="tech-tag">SQLite</span><span class="tech-tag">PyMuPDF</span><span class="tech-tag">sentence-transformers</span><span class="tech-tag">RAG</span>
+                        </div>
+                    </a>
+
+                    <a href="#" class="project-summary-card" data-skills="VS Code Extension,AST Analysis,Groq,Pydantic" onclick="showProjectDetail('project-ai-coach')">
+                        <h3>AI Learning Coach IDE</h3>
+                        <p>VS Code extension that observes coding behavior and returns reflective feedback about process, debugging, and blind spots.</p>
+                        <div class="card-tech-stack">
+                            <span class="tech-tag">VS Code Extension</span><span class="tech-tag">AST Analysis</span><span class="tech-tag">JSON-over-stdio</span><span class="tech-tag">Groq</span><span class="tech-tag">Pydantic</span>
+                        </div>
+                    </a>
+
+                    <a href="#" class="project-summary-card" data-skills="Reinforcement Learning,PyTorch,Pygame,Double DQN,Experience Replay,Reward Shaping" onclick="showProjectDetail('project-rl-pong')">
+                        <h3>Interactive RL Pong Trainer</h3>
+                        <p>Live Double DQN Pong trainer with reward shaping controls, real-time analytics, step mode, and survival battle mode.</p>
+                        <div class="card-tech-stack">
+                            <span class="tech-tag">Reinforcement Learning</span><span class="tech-tag">Double DQN</span><span class="tech-tag">PyTorch</span><span class="tech-tag">Pygame</span><span class="tech-tag">Experience Replay</span><span class="tech-tag">Reward Shaping</span>
+                        </div>
+                    </a>
+                </div>
+
+                <p class="empty-projects" id="empty-projects">No projects match the selected filters.</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- PROJECT DETAIL PAGES -->
+    <div id="project-courseflow" class="page project-detail-page">
+        <section class="section">
+            <div class="container">
+                <div class="detail-header">
+                    <div>
+                        <p class="detail-kicker">Project case study</p>
+                        <h2>CourseFlow</h2>
+                    </div>
+                    <a href="#" class="btn btn-secondary" onclick="showPage('projects')">Back to projects</a>
+                </div>
                 <div class="project-card">
-                    <h3>Interactive Reinforcement Learning Pong Trainer</h3>
-                    <div class="project-meta">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">PyTorch</span>
-                        <span class="tech-tag">Pygame</span>
-                        <span class="tech-tag">Deep Q-Network</span>
-                        <span class="tech-tag">Reinforcement Learning</span>
-                    </div>
+                    <div class="project-section"><h4>Problem Statement</h4><p class="project-description">YouTube has excellent courses, but playlists are passive, hard to search, difficult to review, and fragile when AI processing hits rate limits. CourseFlow turns a playlist into a durable learning system with transcripts, notes, quizzes, search, review cards, exports, and optional diagrams.</p></div>
+                    <div class="project-section"><h4>Why it matters</h4><p class="project-description">The project demonstrates production-oriented AI architecture: asynchronous queues, resumable work, quota-aware scheduling, private object storage, vector search, state machines, and cloud deployment. It also fits the real learner workflow: watch, search, quiz, review, and export without restarting from scratch after failures.</p></div>
+                    <div class="project-section"><h4>System Architecture</h4><div class="architecture-placeholder"><img src="images/courseflow_arch.png" alt="Courseflow architecture"></div></div>
+                    <div class="project-section"><h4>Features</h4><div class="challenge-item"><h5>Durable playlist processing</h5><p>Ingests playlists or videos, tracks every video state, retries failures, and checkpoints transcript and note chunks.</p></div><div class="challenge-item"><h5>Active learning layer</h5><p>Generates structured notes, semantic search, adaptive LangGraph quizzes, SM-2 spaced repetition cards, and exam planning.</p></div><div class="challenge-item"><h5>Diagram and export pipeline</h5><p>Supports Mermaid and optional illustrative diagrams, then exports lessons or complete courses as Markdown, PDF, or Anki decks.</p></div><div class="challenge-item"><h5>Claude Desktop MCP integration</h5><p>Exposes user-scoped course listing, search, and grounded Q&A through a local read-only MCP server.</p></div></div>
+                    <div class="project-section"><h4>System Design Decisions</h4><div class="challenge-item"><h5>Queues over blocking requests</h5><p>Transcription, notes, embeddings, PDFs, and diagrams run through Celery so HTTP requests stay responsive.</p></div><div class="challenge-item"><h5>Redis plus PostgreSQL</h5><p>Redis handles fast counters and active state; PostgreSQL stores durable usage events and recoverable processing state.</p></div><div class="challenge-item"><h5>Hybrid edge/cloud boundary</h5><p>A local fetcher handles YouTube calls that are sensitive to datacenter blocking, while AWS owns durable state and user-facing services.</p></div><div class="challenge-item"><h5>Quota-aware scheduling</h5><p>Groq response headers drive backpressure and retry timing, reducing repeated failures under rate limits.</p></div></div>
+                    <div class="project-section"><h4>Complete Tech Stack</h4><ul class="stack-list"><li>React 18, TypeScript, Vite, React Router</li><li>TanStack Query, Tailwind CSS, React Markdown, Recharts</li><li>Python 3.12, FastAPI, Pydantic, Async SQLAlchemy</li><li>PostgreSQL 16, pgvector, Alembic</li><li>Redis, Celery, Celery Beat</li><li>MinIO locally, Amazon S3 in production</li><li>Groq LLM and Whisper APIs</li><li>LangGraph, LangChain Groq, sentence-transformers</li><li>yt-dlp, youtube-transcript-api, pydub, ffmpeg</li><li>Mermaid CLI, Puppeteer, Sharp, Cloudflare Workers AI</li><li>Docker Compose, AWS EC2, IAM, CloudWatch, GitHub Actions OIDC</li><li>Local read-only MCP server for Claude Desktop</li></ul></div>
+                    <div class="project-section"><h4>Takeaway</h4><p class="project-description">CourseFlow is the strongest expression of my current interests: agentic workflows, cloud architecture, durable distributed jobs, retrieval, and real product-grade system design around AI constraints.</p></div>
+                    <div class="project-section"><h4>Link to Github</h4><div class="project-links"><a href="https://github.com/JustATalentedGuy/courseflow" target="_blank">GitHub Repository</a></div></div>
+                </div>
+            </div>
+        </section>
+    </div>
 
-                    <div class="project-section">
-                        <h4>Problem Statement</h4>
-                        <p class="project-description">
-                            Reinforcement Learning algorithms are often difficult to debug, visualize, and understand in real-time. Most implementations run as silent training loops with little interpretability. This project addresses that gap by creating a fully interactive RL playground where a Deep Q-Network learns to play Pong live, with complete transparency into states, rewards, Q-values, and training dynamics.
+    <div id="project-docflow" class="page project-detail-page">
+        <section class="section"><div class="container"><div class="detail-header"><div><p class="detail-kicker">Project case study</p><h2>Docflow</h2></div><a href="#" class="btn btn-secondary" onclick="showPage('projects')">Back to projects</a></div><div class="project-card">
+            <div class="project-section"><h4>Problem Statement</h4><p class="project-description">Users need a private way to upload documents, organize them, and ask grounded questions across PDFs and images. Docflow solves this with multi-user authentication, async processing, OCR, hybrid retrieval, chat history, and source-grounded answers.</p></div>
+            <div class="project-section"><h4>Why it matters</h4><p class="project-description">Document Q&A is only useful when retrieval is accurate and user isolation is strict. Docflow combines parent-child chunking, vector search, BM25, and Reciprocal Rank Fusion while keeping every file, chat, object key, and vector scoped to the authenticated user.</p></div>
+            <div class="project-section"><h4>System Architecture</h4><div class="architecture-placeholder"><img src="images/docflow_architecture.png" alt="Docflow architecture"></div></div>
+            <div class="project-section"><h4>Features</h4><div class="challenge-item"><h5>Document ingestion</h5><p>Accepts PDFs and images, stores raw files, queues work, extracts text, performs OCR for scanned PDFs, and tracks processing status.</p></div><div class="challenge-item"><h5>Hybrid retrieval</h5><p>Combines Qdrant vector search with BM25 keyword search and Reciprocal Rank Fusion for robust document lookup.</p></div><div class="challenge-item"><h5>Multi-user chat</h5><p>Supports separate files, chats, messages, and search results for every user with bearer-token sessions.</p></div><div class="challenge-item"><h5>AWS demo deployment</h5><p>Runs on EC2 with Nginx, containers, private S3 storage, PostgreSQL, Redis, Qdrant, CloudWatch logs, and IAM role credentials.</p></div></div>
+            <div class="project-section"><h4>System Design Decisions</h4><div class="challenge-item"><h5>Async processing boundary</h5><p>Celery and Redis keep upload requests fast while the worker handles extraction, OCR, chunking, embeddings, and vector writes.</p></div><div class="challenge-item"><h5>Parent-child chunking</h5><p>Small child chunks improve retrieval precision; larger parent chunks give the LLM enough context to answer coherently.</p></div><div class="challenge-item"><h5>User-scoped storage</h5><p>Database rows, object keys, and Qdrant payloads all carry ownership metadata to prevent cross-user leakage.</p></div><div class="challenge-item"><h5>Grounded fallback</h5><p>The prompt instructs the model to say when evidence is missing instead of inventing unsupported document facts.</p></div></div>
+            <div class="project-section"><h4>Complete Tech Stack</h4><ul class="stack-list"><li>React, Vite, Lucide</li><li>FastAPI, Pydantic</li><li>Celery, Redis, LangGraph</li><li>SQLite locally, PostgreSQL for AWS</li><li>MinIO locally, Amazon S3 in AWS</li><li>Qdrant vector database</li><li>BM25, vector search, Reciprocal Rank Fusion</li><li>sentence-transformers embeddings</li><li>Tesseract OCR, PyMuPDF</li><li>Groq through LangChain</li><li>structlog, LangSmith, CloudWatch</li><li>Docker, Nginx, AWS EC2</li></ul></div>
+            <div class="project-section"><h4>Takeaway</h4><p class="project-description">Docflow shows practical RAG beyond a demo: background jobs, hybrid retrieval, cloud storage, tenant isolation, operational logging, and grounded generation.</p></div>
+            <div class="project-section"><h4>Link to Github</h4><div class="project-links"><a href="https://github.com/JustATalentedGuy/docflow" target="_blank">GitHub Repository</a></div></div>
+        </div></div></section>
+    </div>
+
+    <div id="project-pulse" class="page project-detail-page">
+        <section class="section"><div class="container"><div class="detail-header"><div><p class="detail-kicker">Project case study</p><h2>Pulse</h2></div><a href="#" class="btn btn-secondary" onclick="showPage('projects')">Back to projects</a></div><div class="project-card">
+            <div class="project-section"><h4>Problem Statement</h4><p class="project-description">Engineers and researchers follow too many sources: RSS feeds, GitHub, arXiv, newsletters, and saved articles. Pulse collects this information, normalizes it, enriches it with AI, and serves a personalized mobile feed.</p></div>
+            <div class="project-section"><h4>Why it matters</h4><p class="project-description">A useful technical reader needs more than summaries. It needs ingestion isolation, deduplication, ranking, semantic search, learning modes, digests, trends, and a deployment path that can run cheaply for a single owner.</p></div>
+            <div class="project-section"><h4>System Architecture</h4><div class="architecture-placeholder"><img src="images/pulse_arch.png" alt="Pulse architecture"></div></div>
+            <div class="project-section"><h4>Features</h4><div class="challenge-item"><h5>Multi-source ingestion</h5><p>Collects AI and software content from RSS, GitHub, arXiv, and Gmail newsletters with normalization and deduplication.</p></div><div class="challenge-item"><h5>LLM enrichment</h5><p>Uses structured Groq calls for summaries, categories, entities, and scoring.</p></div><div class="challenge-item"><h5>Personalized mobile feed</h5><p>Ranks content using reading, bookmarking, and hiding behavior, with offline cache and network states in the Expo app.</p></div><div class="challenge-item"><h5>Search and learning modes</h5><p>Includes semantic and hybrid search, LangGraph Socratic quizzes, corpus-grounded Ask mode, digests, and trends.</p></div></div>
+            <div class="project-section"><h4>System Design Decisions</h4><div class="challenge-item"><h5>PostgreSQL as knowledge store</h5><p>Combines relational content metadata with pgvector semantic retrieval and full-text search.</p></div><div class="challenge-item"><h5>Failure isolation</h5><p>Ingestion normalizes and deduplicates sources independently so one failing source does not poison the entire feed.</p></div><div class="challenge-item"><h5>Single-owner security model</h5><p>Uses a static API key as a lightweight access gate, suitable for personal deployment but explicitly not multi-user auth.</p></div><div class="challenge-item"><h5>Cheap deployment path</h5><p>Supports local Docker and a zero-cost Render + Supabase route for running the system as a personal tool.</p></div></div>
+            <div class="project-section"><h4>Complete Tech Stack</h4><ul class="stack-list"><li>Expo SDK 56, React Native, Expo Router</li><li>TanStack Query, Zustand</li><li>FastAPI, SQLAlchemy async, Pydantic</li><li>PostgreSQL, pgvector, Alembic</li><li>Groq</li><li>LangGraph</li><li>local MiniLM or Supabase gte-small embeddings</li><li>APScheduler or Supabase Cron</li><li>Docker Compose</li><li>Render, Supabase</li><li>GitHub Actions, EAS</li></ul></div>
+            <div class="project-section"><h4>Takeaway</h4><p class="project-description">Pulse is a personal intelligence system: ingestion, enrichment, retrieval, ranking, and mobile UX tied together into a daily engineering workflow.</p></div>
+            <div class="project-section"><h4>Link to Github</h4><div class="project-links"><a href="https://github.com/JustATalentedGuy/pulse" target="_blank">GitHub Repository</a></div></div>
+        </div></div></section>
+    </div>
+
+    <div id="project-smartnotes" class="page project-detail-page">
+        <section class="section"><div class="container"><div class="detail-header"><div><p class="detail-kicker">Project case study</p><h2>Smart Notes Generator</h2></div><a href="#" class="btn btn-secondary" onclick="showPage('projects')">Back to projects</a></div><div class="project-card">
+            <div class="project-section"><h4>Problem Statement</h4><p class="project-description">Lecture PDFs and slides often contain important diagrams that disappear when converted into plain text prompts. Smart Notes Generator creates structured notes while preserving extracted figures in the right context.</p></div>
+            <div class="project-section"><h4>Why it matters</h4><p class="project-description">Students need trustworthy notes from private course material without sending images to an external model. This project uses a local-first workflow where files and images stay on the machine while text prompts preserve diagram placeholders.</p></div>
+            <div class="project-section"><h4>System Architecture</h4><div class="architecture-placeholder"><img src="images/smart_notes_arch.png" alt="Smart Notes Generator architecture"></div></div>
+            <div class="project-section"><h4>Features</h4><div class="challenge-item"><h5>Image-aware extraction</h5><p>Processes PDFs and PowerPoints, extracts raster/vector figures, filters low-quality images, deduplicates repeated assets, and preserves meaningful diagrams.</p></div><div class="challenge-item"><h5>Zero-token image strategy</h5><p>Sends lightweight placeholders such as IMG tokens to Claude, then restores the original local images after generation.</p></div><div class="challenge-item"><h5>Local evaluation and RAG</h5><p>Scores notes for coverage, structure, density, length, and faithfulness, then supports grounded Q&A over saved notes.</p></div><div class="challenge-item"><h5>Agent refinement</h5><p>Allows targeted edits on specific sections while preserving diagrams and minimizing prompt size.</p></div></div>
+            <div class="project-section"><h4>System Design Decisions</h4><div class="challenge-item"><h5>Local-first privacy boundary</h5><p>Source files and extracted images remain local; the model receives text plus placeholders instead of image payloads.</p></div><div class="challenge-item"><h5>Session state vs saved state</h5><p>Temporary generation state lives in memory and OS temp files, while saved notes, evaluations, chunks, and chats live in SQLite.</p></div><div class="challenge-item"><h5>Fallback retrieval</h5><p>Semantic embeddings are used when available, with TF-IDF and Jaccard fallbacks for dependency-light environments.</p></div><div class="challenge-item"><h5>Export fallback ladder</h5><p>PDF export tries WeasyPrint, falls back to xhtml2pdf, and finally returns browser-printable HTML.</p></div></div>
+            <div class="project-section"><h4>Complete Tech Stack</h4><ul class="stack-list"><li>React 18, TypeScript, Vite</li><li>Tailwind CSS, Radix UI, lucide-react</li><li>FastAPI, uvicorn, Pydantic v2</li><li>PyMuPDF, python-pptx, Pillow</li><li>Anthropic Python SDK</li><li>SQLite</li><li>markdown, WeasyPrint, xhtml2pdf</li><li>scikit-learn, NumPy</li><li>sentence-transformers all-MiniLM-L6-v2</li><li>RAG with heading chunks and semantic/TF-IDF/Jaccard retrieval</li></ul></div>
+            <div class="project-section"><h4>Takeaway</h4><p class="project-description">Smart Notes Generator shows careful AI product design around privacy, cost, graceful degradation, evaluation, and diagram-preserving postprocessing.</p></div>
+            <div class="project-section"><h4>Link to Github</h4><div class="project-links"><a href="https://github.com/JustATalentedGuy/smart-notes-generator" target="_blank">GitHub Repository</a></div></div>
+        </div></div></section>
+    </div>
+
+    <div id="project-ai-coach" class="page project-detail-page">
+        <section class="section"><div class="container"><div class="detail-header"><div><p class="detail-kicker">Project case study</p><h2>AI Learning Coach IDE</h2></div><a href="#" class="btn btn-secondary" onclick="showPage('projects')">Back to projects</a></div><div class="project-card">
+            <div class="project-section"><h4>Problem Statement</h4><p class="project-description">Most coding assistants optimize for the final answer. AI Learning Coach focuses on how the learner thinks while solving DSA and competitive programming problems.</p></div>
+            <div class="project-section"><h4>Why it matters</h4><p class="project-description">Learners often repeat hidden process mistakes: skipping planning, rewriting the same region, mishandling boundaries, or abandoning approaches after pauses. The extension turns the IDE into an event-driven learning observatory and gives reflective feedback without leaking solutions.</p></div>
+            <div class="project-section"><h4>System Architecture</h4><div class="architecture-diagram"><img src="images/aiide_arch.png" alt="AI Learning Coach architecture"></div></div>
+            <div class="project-section"><h4>Features</h4><div class="challenge-item"><h5>Problem context parsing</h5><p>Captures pasted LeetCode, Codeforces, or plain-text statements and extracts title, difficulty, constraints, examples, tags, and expected complexity when available.</p></div><div class="challenge-item"><h5>Session signal capture</h5><p>Records edits, saves, diagnostics, cursor movement, idle time, undo/redo-like behavior, and AST snapshots.</p></div><div class="challenge-item"><h5>Pedagogical feedback</h5><p>Returns structured observations, issues, process feedback, learning suggestions, and reflection questions in a VS Code webview.</p></div></div>
+            <div class="project-section"><h4>System Design Decisions</h4><div class="challenge-item"><h5>Signal compression before LLM calls</h5><p>Raw editor events are noisy, so the extension derives compact metrics such as edit churn, planning time ratio, boundary error density, and abandoned attempts.</p></div><div class="challenge-item"><h5>Local Python agent boundary</h5><p>The extension talks to a Python agent over line-delimited JSON, separating editor concerns from feedback generation.</p></div><div class="challenge-item"><h5>Schema-constrained output</h5><p>Pydantic schemas keep LLM feedback predictable and prevent the webview from receiving unstructured assistant output.</p></div><div class="challenge-item"><h5>Pedagogical guardrails</h5><p>The prompt emphasizes process feedback and avoids direct code fixes or full solutions.</p></div></div>
+            <div class="project-section"><h4>Complete Tech Stack</h4><ul class="stack-list"><li>VS Code Extension API</li><li>TypeScript compiler API for AST fingerprints</li><li>TypeScript command and event layers</li><li>VS Code webview UI</li><li>JSON-over-stdio bridge</li><li>Python embedded agent</li><li>Pydantic schemas</li><li>Groq chat completion</li><li>In-memory learner profile and session history</li><li>Optional FastAPI backend entrypoint</li></ul></div>
+            <div class="project-section"><h4>Takeaway</h4><p class="project-description">AI Learning Coach is an agentic developer-tool project focused on behavior modeling, structured context, and useful feedback rather than shortcut generation.</p></div>
+            <div class="project-section"><h4>Link to Github</h4><div class="project-links"><a href="https://github.com/JustATalentedGuy/AIIDE" target="_blank">GitHub Repository</a></div></div>
+        </div></div></section>
+    </div>
+
+    <div id="project-rl-pong" class="page project-detail-page">
+        <section class="section"><div class="container"><div class="detail-header"><div><p class="detail-kicker">Project case study</p><h2>Interactive Reinforcement Learning Pong Trainer</h2></div><a href="#" class="btn btn-secondary" onclick="showPage('projects')">Back to projects</a></div><div class="project-card">
+            <div class="project-section"><h4>Problem Statement</h4><p class="project-description">RL training loops are often opaque. This project creates a visual Pong environment where a Double DQN agent trains online while exposing reward, loss, Q-values, actions, and state dynamics.</p></div>
+            <div class="project-section"><h4>Why it matters</h4><p class="project-description">Reinforcement learning becomes easier to understand when reward shaping, exploration, target networks, and policy behavior can be inspected live. The trainer turns a classic control problem into an interactive laboratory.</p></div>
+            <div class="project-section"><h4>System Architecture</h4><div class="architecture-diagram"><img src="images/rl_arch.png" alt="RL Pong system architecture"></div></div>
+            <div class="project-section"><h4>Features</h4><div class="challenge-item"><h5>Live reward shaping</h5><p>Lets users tune terminal rewards, miss penalties, alignment rewards, shaping alpha, and action-change penalties at runtime.</p></div><div class="challenge-item"><h5>Step-by-step debugging</h5><p>Manual stepping mode shows recent reward, loss, state information, and training behavior frame by frame.</p></div><div class="challenge-item"><h5>Battle mode</h5><p>Runs a greedy survival challenge with escalating difficulty and a persistent CSV leaderboard.</p></div><div class="challenge-item"><h5>Model persistence</h5><p>Saves model weights, target network, optimizer state, episode counters, reward/loss history, and hit statistics.</p></div></div>
+            <div class="project-section"><h4>System Design Decisions</h4><div class="challenge-item"><h5>Dense reward shaping</h5><p>Distance-to-intercept shaping provides feedback while the ball is still moving, reducing the sparseness of Pong rewards.</p></div><div class="challenge-item"><h5>Double DQN</h5><p>Uses a target network and Double DQN targets for more stable online learning.</p></div><div class="challenge-item"><h5>Multiple opponent modes</h5><p>Supports perfect, heuristic, and human opponents to test different training and evaluation conditions.</p></div><div class="challenge-item"><h5>UI-first observability</h5><p>Graphs and diagnostics are rendered directly into the game loop so the learning process stays visible.</p></div></div>
+            <div class="project-section"><h4>Complete Tech Stack</h4><ul class="stack-list"><li>PyTorch</li><li>Pygame</li><li>Double Deep Q-Network</li><li>Experience replay buffer</li><li>Target network updates</li><li>Adam optimizer, MSE loss, ReLU MLP</li><li>Matplotlib charts inside Pygame</li><li>CSV leaderboard persistence</li><li>Online training and greedy evaluation modes</li></ul></div>
+            <div class="project-section"><h4>Takeaway</h4><p class="project-description">The RL trainer reflects my interest in making complex learning systems inspectable, tunable, and grounded in actual behavior rather than hidden training logs.</p></div>
+            <div class="project-section"><h4>Link to Github</h4><div class="project-links"><a href="https://github.com/JustATalentedGuy/Play2LearnRL" target="_blank">GitHub Repository</a></div></div>
+        </div></div></section>
+    </div>
+
+    <!-- BLOGS PAGE -->
+    <div id="blogs" class="page">
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Blogs</h2>
+                    <p>Notes on agentic AI, system design, cloud architecture, and lessons from building real AI systems.</p>
+                </div>
+
+                <div class="blog-list">
+                    <article class="blog-card">
+                        <h3>Blogs</h3>
+                        <p>
+                            Weekly blogs starting next week
                         </p>
-                    </div>
-
-                    <div class="project-section">
-                        <h4>Why It Matters</h4>
-                        <p class="project-description">
-                            Understanding RL requires more than reading equations — it demands observing policy evolution, reward shaping effects, and stability trade-offs. This system transforms a classic control problem into a live experimental sandbox where hyperparameters, reward components, and difficulty can be modified on the fly, enabling deeper intuition about learning behavior.
-                        </p>
-                    </div>
-
-                    <div class="project-section">
-                        <h4>System Architecture</h4>
-                        <div class="architecture-diagram">
-                            <img src="images/rl_arch.png"
-                                alt="Pong RL system architecture: environment, state encoding, DQN policy, replay buffer, double DQN, live training visualization">
-                        </div>
-                    </div>
-
-                    <div class="project-section">
-                        <h4>Core Features</h4>
-
-                        <div class="challenge-item">
-                            <h5>Live Reward Shaping Controls</h5>
-                            <p>
-                                Fully configurable shaping parameters including terminal rewards, action-change penalties, stabilization rewards, and distance-based shaping (α). Enables experimentation without modifying source code.
-                            </p>
-                        </div>
-
-                        <div class="challenge-item">
-                            <h5>Step-by-Step Debug Mode</h5>
-                            <p>
-                                Manual stepping mode allows frame-by-frame execution. Displays reward and loss graphs in real time, enabling microscopic inspection of learning dynamics.
-                            </p>
-                        </div>
-
-                        <div class="challenge-item">
-                            <h5>Battle (Survival) Mode</h5>
-                            <p>
-                                A 5-minute survival challenge where difficulty escalates every 30 seconds. Ball speed increases, paddle height decreases, and leaderboard statistics track performance.
-                            </p>
-                        </div>
-
-                        <div class="challenge-item">
-                            <h5>Multiple Opponent Types</h5>
-                            <p>
-                                Train against a mathematically perfect intercept bot, a heuristic-based decent bot, or a human player. Enables curriculum-style training and evaluation.
-                            </p>
-                        </div>
-
-                        <div class="challenge-item">
-                            <h5>Full Model Persistence</h5>
-                            <p>
-                                Save and load not only network weights, but optimizer state, replay statistics, reward windows, and training metrics — ensuring complete session restoration.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="project-section">
-                        <h4>Technical Highlights</h4>
-                        <table class="results-table">
-                            <tr>
-                                <th>Component</th>
-                                <th>Implementation</th>
-                            </tr>
-                            <tr>
-                                <td>Algorithm</td>
-                                <td>Double Deep Q-Network (DQN)</td>
-                            </tr>
-                            <tr>
-                                <td>Network Architecture</td>
-                                <td>5 → 128 → 128 → 3 (ReLU)</td>
-                            </tr>
-                            <tr>
-                                <td>Replay Buffer</td>
-                                <td>20,000 transitions</td>
-                            </tr>
-                            <tr>
-                                <td>Batch Size</td>
-                                <td>32</td>
-                            </tr>
-                            <tr>
-                                <td>Target Network Updates</td>
-                                <td>Periodic hard update (configurable)</td>
-                            </tr>
-                            <tr>
-                                <td>Visualization</td>
-                                <td>Matplotlib rendered into Pygame surface</td>
-                            </tr>
-                        </table>
-                    </div>
-
-                    <div class="project-section">
-                        <h4>Challenges & Solutions</h4>
-
-                        <div class="challenge-item">
-                            <h5>Challenge: RL Instability & Jittery Policies</h5>
-                            <p>
-                                Solution: Implemented action-change penalties and stabilization rewards to encourage smoother paddle control while preserving responsiveness.
-                            </p>
-                        </div>
-
-                        <div class="challenge-item">
-                            <h5>Challenge: Sparse Rewards in Pong</h5>
-                            <p>
-                                Solution: Designed distance-based shaping reward using predicted intercept points to provide dense learning feedback during ball travel.
-                            </p>
-                        </div>
-
-                        <div class="challenge-item">
-                            <h5>Challenge: Observability of Learning Process</h5>
-                            <p>
-                                Solution: Built real-time reward/loss charts, Q-value display, epsilon tracking, and episode statistics directly into the game UI.
-                            </p>
-                        </div>
-
-                    </div>
-
-                    <div class="project-section">
-                        <h4>Impact & Learning Outcomes</h4>
-                        <p class="project-description">
-                            This project bridges theory and practice by converting a textbook RL algorithm into an interactive laboratory. It provides hands-on exposure to reward shaping, exploration strategies, Double DQN stabilization, and curriculum-based difficulty progression — all within a dynamic, visual environment.
-                        </p>
-                    </div>
-
-                    <div class="project-links">
-                        <a href="https://github.com/JustATalentedGuy/Play2LearnRL" target="_blank">📁 GitHub Repository →</a>
-                    </div>
+                        <a href="#" onclick="return false;">Coming soon</a>
+                    </article>
                 </div>
             </div>
         </section>
@@ -1151,49 +1222,49 @@
 
                 <div class="about-content">
                     <p>
-                        I'm a Software Engineer with strong skills and interests in Machine Learning and Large Language Model systems. My background combines rigorous computer science fundamentals from SSN College of Engineering with hands-on experience building ML systems and conducting research.
+                        I'm a Software Engineer focused on agentic AI, system design, and cloud-native AI applications. My background combines computer science fundamentals from SSN College of Engineering with hands-on experience building retrieval systems, AI developer tools, learning platforms, and deployed cloud architectures.
                     </p>
 
                     <p>
-                        My work centers on research-driven machine learning, with particular focus on natural language processing, and agentic AI systems. I believe in understanding systems at a fundamental level — from the mathematics behind algorithms to the engineering decisions that make them production-ready.
+                        My work is shaped by one recurring question: how do we make AI systems reliable when they move from a notebook to a real product? I care about queues, state, rate limits, isolation, observability, retrieval quality, and the engineering decisions that make intelligent systems maintainable.
                     </p>
 
                     <p>
-                        Currently, I'm focused on Large Language Models, RAG architectures, and evaluation methodologies for generative AI systems. My projects span Reinforcement Learning systems, chatbots, and developer tools powered by AI.
+                        Currently, I'm focused on agentic workflows, RAG architectures, MCP integrations, asynchronous processing, PostgreSQL/pgvector systems, and cloud deployments on AWS and adjacent platforms.
                     </p>
 
                     <p>
-                        I'm seeking opportunities in AI engineering and ML research where I can contribute to building systems that push the boundaries of what's possible with artificial intelligence. My goal is to work at the intersection of cutting-edge research and practical deployment, building solutions that are both technically sound and impactful.
+                        I'm seeking opportunities in AI engineering and backend/platform engineering where I can build systems that combine strong AI capability with production-grade architecture.
                     </p>
 
                     <div class="skills-grid">
                         <div class="skill-category">
-                            <h4>Machine Learning</h4>
-                            <ul>
-                                <li>Deep Learning (PyTorch)</li>
-                                <li>Natural Language Processing</li>
-                                <li>Large Language Models</li>
-                                <li>Reinforcement Learning</li>
-                            </ul>
-                        </div>
-
-                        <div class="skill-category">
-                            <h4>LLM & Generative AI</h4>
+                            <h4>Agentic AI</h4>
                             <ul>
                                 <li>RAG Systems</li>
-                                <li>Prompt Engineering</li>
-                                <li>LangChain, LlamaIndex</li>
                                 <li>Tool-calling & Agents</li>
+                                <li>MCP Integrations</li>
+                                <li>Structured LLM Workflows</li>
                             </ul>
                         </div>
 
                         <div class="skill-category">
-                            <h4>Software Engineering</h4>
+                            <h4>System Design</h4>
                             <ul>
-                                <li>Python, Java, JavaScript/TypeScript</li>
-                                <li>MongoDB, MySQL, Hadoop, Spark, Neo4j</li>
-                                <li>WSL, Git</li>
-                                <li>RESTful API Design</li>
+                                <li>Queues and Background Workers</li>
+                                <li>PostgreSQL, Redis, Vector Search</li>
+                                <li>Object Storage and User Isolation</li>
+                                <li>Rate Limits, Retries, Observability</li>
+                            </ul>
+                        </div>
+
+                        <div class="skill-category">
+                            <h4>Cloud & Engineering</h4>
+                            <ul>
+                                <li>FastAPI, React, TypeScript</li>
+                                <li>Docker, Nginx, GitHub Actions</li>
+                                <li>AWS EC2, S3, IAM, CloudWatch</li>
+                                <li>REST API and Product Engineering</li>
                             </ul>
                         </div>
                     </div>
@@ -1230,7 +1301,8 @@
 
                 <div class="resume-actions">
                     <a href="images/RESUME.pdf" class="btn btn-primary" download>Download Resume PDF</a>
-                    <a href="https://drive.google.com/file/d/1lmA_C5nInBm6Toa6v19ypASP8Gwt8qQ5/view?usp=sharing" class="btn btn-secondary" target="_blank">View on Google Drive</a>
+                    <!-- <a href="https://drive.google.com/file/d/1lmA_C5nInBm6Toa6v19ypASP8Gwt8qQ5/view?usp=sharing" class="btn btn-secondary" target="_blank">View on Google Drive</a> -->
+                    <a href="https://drive.google.com/file/d/1GkpVEeFww2kw_UPkm54s8KbyCZplRW85/view?usp=sharing" class="btn btn-secondary" target="_blank">View on Google Drive</a>
                 </div>
 
                 <p class="last-updated">Last updated: February 2026</p>
@@ -1239,9 +1311,9 @@
                     <h3 style="margin-bottom: 1rem;">Quick Summary</h3>
                     <ul style="color: var(--text-secondary); line-height: 2;">
                         <li><strong>Education:</strong> M.Tech Computer Science & Engineering (5 Years Integrated), SSN College of Engineering</li>
-                        <li><strong>Specialization:</strong> Machine Learning, LLM Systems, Agentic AI</li>
-                        <li><strong>Skills:</strong> Python, PyTorch, LangChain, Competitive Programming</li>
-                        <li><strong>Interests:</strong> Research-driven AI, Agentic Systems, Production ML</li>
+                        <li><strong>Specialization:</strong> Agentic AI, System Design, Cloud Architectures</li>
+                        <li><strong>Skills:</strong> FastAPI, PostgreSQL, Redis, RAG, AWS, Docker, LangGraph</li>
+                        <li><strong>Interests:</strong> Agentic workflows, cloud-native AI systems, durable backend architecture</li>
                     </ul>
                 </div>
             </div>
@@ -1261,7 +1333,7 @@
                     <div class="contact-info">
                         <h3>Get in Touch</h3>
                         <p style="color: var(--text-secondary); margin-bottom: 2rem;">
-                            I'm open to discussing engineering opportunities, research collaborations and interesting ML projects.
+                            I'm open to discussing AI engineering, backend/platform roles, cloud architecture work, and research collaborations around agentic systems.
                         </p>
 
                         <div class="contact-links">
@@ -1348,7 +1420,7 @@
     <footer>
         <div class="container">
             <p>&copy; 2026 Ponsubash Raj R. Built with focus on clarity and substance.</p>
-            <p style="margin-top: 0.5rem; font-size: 0.9rem;">Software Engineer (ML & LLM Systems)</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">Software Engineer (Agentic AI, System Design & Cloud Architecture)</p>
         </div>
     </footer>
 
@@ -1382,6 +1454,96 @@
             }
         });
 
+        const projectFilterSkills = [
+            'AWS',
+            'MCP',
+            'Redis',
+            'PostgreSQL',
+            'pgvector',
+            'Qdrant',
+            'Celery',
+            'RAG',
+            'LangGraph',
+            'FastAPI',
+            'Groq',
+            'Anthropic',
+            'MinIO/S3',
+            'Docker',
+            'Cloudflare',
+            'Supabase',
+            'Expo',
+            'VS Code Extension',
+            'AST Analysis',
+            'Reinforcement Learning',
+            'PyTorch',
+            'Pygame'
+        ];
+
+        let selectedProjectSkills = new Set(projectFilterSkills);
+
+        function renderProjectFilters() {
+            const filterList = document.getElementById('project-filter-list');
+            if (!filterList) return;
+
+            filterList.innerHTML = '';
+
+            projectFilterSkills.forEach(skill => {
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'filter-btn active';
+                button.textContent = skill;
+                button.setAttribute('aria-pressed', 'true');
+                button.dataset.skill = skill;
+                button.addEventListener('click', () => toggleProjectFilter(skill));
+                filterList.appendChild(button);
+            });
+        }
+
+        function toggleProjectFilter(skill) {
+            if (selectedProjectSkills.has(skill)) {
+                selectedProjectSkills.delete(skill);
+            } else {
+                selectedProjectSkills.add(skill);
+            }
+
+            updateProjectFilters();
+        }
+
+        function selectAllProjectFilters() {
+            selectedProjectSkills = new Set(projectFilterSkills);
+            updateProjectFilters();
+        }
+
+        function deselectAllProjectFilters() {
+            selectedProjectSkills.clear();
+            updateProjectFilters();
+        }
+
+        function updateProjectFilters() {
+            document.querySelectorAll('#project-filter-list .filter-btn').forEach(button => {
+                const isActive = selectedProjectSkills.has(button.dataset.skill);
+                button.classList.toggle('active', isActive);
+                button.setAttribute('aria-pressed', String(isActive));
+            });
+
+            let visibleCount = 0;
+            document.querySelectorAll('.project-summary-card').forEach(card => {
+                const skills = (card.dataset.skills || '').split(',').map(skill => skill.trim());
+                const isVisible = skills.some(skill => selectedProjectSkills.has(skill));
+                card.classList.toggle('hidden', !isVisible);
+                if (isVisible) visibleCount += 1;
+            });
+
+            const emptyState = document.getElementById('empty-projects');
+            if (emptyState) {
+                emptyState.classList.toggle('visible', visibleCount === 0);
+            }
+        }
+
+        function showProjectDetail(pageId) {
+            showPage(pageId);
+        }
+
         function showPage(pageId) {
             const pages = document.querySelectorAll('.page');
             pages.forEach(page => page.classList.remove('active'));
@@ -1391,10 +1553,17 @@
             const navLinks = document.querySelectorAll('.nav-links a');
             navLinks.forEach(link => link.classList.remove('active'));
             
-            document.getElementById('nav-' + pageId).classList.add('active');
+            const navPageId = pageId.startsWith('project-') ? 'projects' : pageId;
+            const activeNav = document.getElementById('nav-' + navPageId);
+            if (activeNav) {
+                activeNav.classList.add('active');
+            }
             
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+
+        renderProjectFilters();
+        updateProjectFilters();
     </script>
 </body>
 </html>
